@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+# import ldap
+# from django_auth_ldap.config import LDAPSearch
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'sslserver',  # !! Use only for development/local testing of this example
     # 'django.contrib.staticfiles',
 ]
 
@@ -123,3 +127,63 @@ STATIC_ROOT = BASE_DIR / 'simple_app' / 'static'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#############################################################################
+# Sample LDAP authentication configuration
+# 
+# The configuration here is an example and may differ
+# somewhat for the environment that you are working
+# with.
+# Authentication here is based on django-auth-ldap - see
+# https://django-auth-ldap.readthedocs.io for more details.
+#############################################################################
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',  # This is the default value
+#     'django_auth_ldap.backend.LDAPBackend',
+# )
+# # Use "ldaps" below for secure connection to the LDAP server
+# AUTH_LDAP_SERVER_URI = 'ldap://<your LDAP server URI>'
+# # You may need to use this option if you don't have global LDAP
+# # credentials - if so, see docs for more information:
+# # https://django-auth-ldap.readthedocs.io/en/latest/reference.html#auth-ldap-bind-as-authenticating-user
+# # AUTH_LDAP_BIND_AS_AUTHENTICATING_USER = True
+# # Disable referrals in the connection options
+# AUTH_LDAP_CONNECTION_OPTIONS = {
+#     ldap.OPT_REFERRALS: 0
+# }
+# # You may not need to update user every time, only on initial login
+# # Set the value below to True to update the Django User object
+# # fields from the information received from LDAP on every login.
+# AUTH_LDAP_ALWAYS_UPDATE_USER = False
+# # Set the bind DN if required, e.g. you may have something with a structure
+# # like"%(user)s@EXAMPLE.DOMAIN"
+# # see (https://django-auth-ldap.readthedocs.io/en/latest/authentication.html#search-bind)
+# # for more details. Instead of this option, you may instead need to set
+# # AUTH_LDAP_USER_DN_TEMPLATE - see the django_auth_ldap docs for info
+# AUTH_LDAP_BIND_DN = "<Enter your bind DN here>"
+# # Enter the LDAP search configuration, e.g. the first parameter may
+# # be a set of domain components, such as "dc=example,dc=com" or include an
+# # "ou" parameter. The final parameter may use a "uid" or "cn" parameter
+# AUTH_LDAP_USER_SEARCH = LDAPSearch("[dc=example,dc=com]", ldap.SCOPE_SUBTREE,
+#                                    "uid=%(user)s")
+# # Map attributes from the LDAP directory information received into
+# # the Django User object using a map such as that below. For more info see:
+# # https://django-auth-ldap.readthedocs.io/en/latest/users.html#easy-attributes
+# AUTH_LDAP_USER_ATTR_MAP = {"first_name": "givenName", "last_name": "sn"}
+# # Enable the setting below or use an "ldaps" URL scheme to enable
+# # a secure connection to the LDAP server.
+# # AUTH_LDAP_START_TLS = True
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console":
+            {"class": "logging.StreamHandler"}
+    },
+    "loggers": {
+        "django_auth_ldap":
+            {"level": "INFO", "handlers": ["console"]}
+    },
+}

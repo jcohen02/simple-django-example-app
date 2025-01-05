@@ -1,2 +1,4 @@
 Django==5.1.4
+django-sslserver
+django_auth_ldap==5.1.4
 flake8
