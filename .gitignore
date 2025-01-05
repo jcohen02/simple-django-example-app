@@ -87,3 +87,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Eclipse/pydev and VSCode project settings
+.project
+.pydevproject
+*.code-workspace
+.vscode/
+
