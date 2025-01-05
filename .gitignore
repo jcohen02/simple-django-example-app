@@ -94,3 +94,5 @@ ENV/
 *.code-workspace
 .vscode/
 
+# Ignore the app DB
+simple_app.db

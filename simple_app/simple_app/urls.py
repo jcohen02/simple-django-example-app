@@ -35,8 +35,6 @@ urlpatterns = [
     path(r'userhome', SignedInIndexView.as_view(), name="index_signedin"),
     path(r'accounts/login/', auth_views.LoginView.as_view()),
     path(r'accounts/logout/', auth_views.LogoutView.as_view()),
-] + [
-    static('js/', document_root=settings.STATIC_ROOT / 'js'),
-    static('css/', document_root=settings.STATIC_ROOT / 'css'),
-    static('img/', document_root=settings.STATIC_ROOT / 'img'),
-]
+] + (static('js/', document_root=settings.STATIC_ROOT / 'js') +
+     static('css/', document_root=settings.STATIC_ROOT / 'css') +
+     static('img/', document_root=settings.STATIC_ROOT / 'img'))

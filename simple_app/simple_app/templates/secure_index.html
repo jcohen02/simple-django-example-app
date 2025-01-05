@@ -33,7 +33,12 @@
       <br/>
       <div class="row">
         <div class="col-md-12">
-          <a href="/accounts/logout" class="btn btn-primary">Sign out</a>
+          <form method="POST" action="/accounts/logout/" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" name="logout" value="logout" class="btn btn-primary">
+              Sign out
+            </button>
+          </form>
         </div>
       </div>
     </div>
